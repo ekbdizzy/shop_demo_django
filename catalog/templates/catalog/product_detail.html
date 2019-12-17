@@ -1,0 +1,18 @@
+{% extends "shop/index.html" %}
+{% load static %}
+
+{% block content %}
+<div class="row">
+
+    <div class="col-md-6 col-sm-12 float-left mt-3">
+        <img class="w-100" src="{{ product.image.url }}">
+    </div>
+    <div class="col-md-6 col-sm-12">
+        <h3 class="h3 mt-5"> {{ product.name }}</h3>
+        <p class="text mt-3 mb-3">{{ product.description}}</p>
+        <button class="btn btn-primary" value="Submit">Buy for ${{ product.price }}</button>
+    </div>
+
+</div>
+
+{% endblock content %}

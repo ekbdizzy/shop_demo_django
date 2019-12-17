@@ -1,0 +1,11 @@
+{% extends 'shop/index.html' %}
+{% load static %}
+
+{% block content %}
+
+    <h3 class="h3 p-2 mt-2">{{ category.name }}</h3>
+    {% for product in products %}
+        {% include 'catalog/product.html' %}
+    {% endfor %}
+
+{% endblock content %}
