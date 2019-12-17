@@ -4,3 +4,4 @@ db.sqlite3
 venv/
 */migrations/
 media/products/
+django_demo_shop/.env
