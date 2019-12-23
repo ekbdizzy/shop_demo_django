@@ -1,17 +1,17 @@
 from django.shortcuts import render
 from django.views import View
+from django.shortcuts import get_object_or_404
 from catalog.models import Category, Product
 from cart.cart import Cart
 
 
-# Create your views here.
 class ProductsInCategoryView(View):
     template_name = 'catalog/products_in_category.html'
 
     def get(self, request, category_slug, *args, **kwargs):
         cart = Cart(request)
         categories = Category.objects.all()
-        category = Category.objects.get(slug=category_slug)
+        category = get_object_or_404(Category, slug=category_slug)
         products = Product.objects.filter(category=category)
         context = {
             'categories': categories,
@@ -28,7 +28,7 @@ class ProductDetailView(View):
     def get(self, request, product_slug, *args, **kwargs):
         cart = Cart(request)
         categories = Category.objects.all()
-        product = Product.objects.get(slug=product_slug)
+        product = get_object_or_404(Product, slug=product_slug)
 
         context = {
             'categories': categories,
@@ -37,3 +37,13 @@ class ProductDetailView(View):
         }
 
         return render(request, self.template_name, context)
+
+
+def page_does_not_exists(request, exception):
+    template_name = 'catalog/page_does_not_exists.html'
+    return render(request, template_name, {})
+
+
+def server_error(request):
+    template_name = 'catalog/server_error.html'
+    return render(request, template_name, {})

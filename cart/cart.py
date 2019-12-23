@@ -1,7 +1,6 @@
 from django.conf import settings
-from django.http import Http404
 from catalog.models import Product
-import logging
+from django.shortcuts import get_object_or_404
 
 
 class Cart(object):
@@ -15,16 +14,12 @@ class Cart(object):
         if self.cart.get(product_id, None):
             self.cart[product_id]['quantity'] += quantity
         else:
-            try:
-                product = Product.objects.get(id=product_id)
-                self.cart['product_id'] = {
-                    'name': product.name,
-                    'quantity': quantity,
-                    'price': product.price,
-                }
-            except Product.DoesNotExist as error:
-                logging.error(error)
-                raise Http404
+            product = get_object_or_404(Product, id=product_id)
+            self.cart['product_id'] = {
+                'name': product.name,
+                'quantity': quantity,
+                'price': product.price,
+            }
 
     def remove_from_cart(self, product_id):
         if self.cart.get(product_id, None):

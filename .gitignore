@@ -5,3 +5,5 @@ venv/
 */migrations/
 media/products/
 django_demo_shop/.env
+static/admin/
+static/debug_toolbar/

@@ -2,12 +2,11 @@ from django.contrib import admin
 from .models import Product, Category
 
 
-# Register your models here.
-
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     class Meta:
         model = Category
+
     prepopulated_fields = {"slug": ('name',)}
 
 
@@ -21,4 +20,3 @@ class ProductAdmin(admin.ModelAdmin):
     class Meta:
         model = Product
         ordering = ('name',)
-

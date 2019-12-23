@@ -17,6 +17,7 @@ INTERNAL_IPS = env.list('INTERNAL_IPS')
 CART = 'cart'
 
 
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -25,12 +26,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'debug_toolbar',
-    'bootstrap4',
 
+    'bootstrap4',
     'catalog',
     'shop',
 ]
-
 MIDDLEWARE = [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',

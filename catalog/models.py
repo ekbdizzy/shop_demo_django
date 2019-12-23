@@ -20,17 +20,24 @@ class Category(models.Model):
 
 
 class Product(models.Model):
+    DEFAULT_IMAGE_URL = "products/default_image.jpg"
 
     def image_folder(self, filename):
         filename = ".".join([self.slug, filename.split('.')[-1]])
         return f'products/{self.slug}/{filename}'
+
+    def get_image_url(self):
+        try:
+            return self.image.url
+        except ValueError:
+            return self.DEFAULT_IMAGE_URL
 
     name = models.CharField(max_length=100, default=None, blank=True)
     slug = models.SlugField(blank=True)
     description = models.TextField(max_length=2000, blank=True, default='')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category')
     is_active = models.BooleanField(default=True)
-    image = models.ImageField(upload_to=image_folder)
+    image = models.ImageField(upload_to=image_folder, blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
 
     def __str__(self):
